@@ -1,0 +1,114 @@
+:root {
+  --background-color: #0c0a10;
+  --main-font-color: #c2b8ff;
+  --second-font-color: #f4f2f0;
+  --white-color: #fff;
+  --shadow: #a99cd2;
+  --main-heading-color: #a597ea;
+  --main-padding-desktop: 70px 60px 20px 60px;
+  --other-padding-desktop: 90px 40px 70px;
+  --margin-all-section: 20px auto;
+}
+
+@mixin respond-to($media) {
+  @if $media == laptop {
+    @media only screen and (max-width: 1200px) {
+      @content;
+    }
+  } @else if $media == minilaptop {
+    @media only screen and (max-width: 920px) {
+      @content;
+    }
+  } @else if $media == tablet {
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  } @else if $media == mobile {
+    @media only screen and (max-width: 520px) {
+      @content;
+    }
+  }
+}
+
+.navbar {
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  z-index: 10000;
+
+  a {
+    font-family: poppins, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 40px;
+    border: 1px solid var(--main-heading-color);
+    text-decoration: none;
+    color: var(--background-color);
+    background: var(--main-heading-color);
+    transition: ease-in 250ms;
+
+    &:hover {
+      background: transparent;
+      color: var(--main-font-color)
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  max-width: 1440px;
+  padding: var(--main-padding-desktop);
+  margin: 0 auto;
+
+  .main-title {
+    text-align: center;
+    font-size: 3.4em;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .last-update {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+
+  .policy-container {
+    .policy {
+      border: 1.5px solid var(--white-color);
+      padding: 12px;
+      margin-bottom: 8px;
+      opacity: 0.5;
+      transition: ease-in 250ms;
+
+      &:hover {
+        opacity: 1;
+        box-shadow: 0 2px 3px var(--second-font-color);
+      }
+      .title-policy {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+      .content-policy {
+        text-align: justify;
+        font-size: 0.8rem;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+@include respond-to(tablet) {
+  .content {
+    padding-bottom: 80px;
+  }
+}
+
+@include respond-to(mobile) {
+  .content {
+    padding-bottom: 100px;
+  }
+}
