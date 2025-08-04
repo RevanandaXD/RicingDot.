@@ -19,6 +19,8 @@ async function loadData() {
       "PopOS": "../assets/images/pop-os.svg",
     };
 
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
     datacontainer.innerHTML = data.map(item => {
       const currectLogo = logoMap[item.distro]
       return `
@@ -37,10 +39,20 @@ async function loadData() {
     </div>`
     }).join('');
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await waitForImagesToLoad(datacontainer);
 
     loading.style.display = 'none'
     datacontainer.style.display = 'grid'
+    function waitForImagesToLoad(container) {
+      const images = container.querySelectorAll('img');
+      const promises = Array.from(images).map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => {
+          img.onload = img.onerror = () => resolve();
+        });
+      });
+    return Promise.all(promises);
+    }
   } catch (err) {
     console.log(err);
     loading.textContent = 'Gagal Memuat Data'
