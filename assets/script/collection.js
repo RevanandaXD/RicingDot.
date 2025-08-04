@@ -7,6 +7,7 @@ async function loadData() {
     const res = await fetch('https://gist.githubusercontent.com/RevanandaXD/0c2a6eca9a39510fe49282c765538046/raw/b95acf6fb7b4166adb1b0c34ff395a4c3611ff13/linux-dotfiles');
     const data = await res.json();
     datacontainer.style.display = 'none'
+    await waitForImagesToLoad(datacontainer);
 
     const logoMap = {
       "Arch": "../assets/images/Arch.svg",
@@ -38,8 +39,6 @@ async function loadData() {
       </div>
     </div>`
     }).join('');
-
-    await waitForImagesToLoad(datacontainer);
 
     loading.style.display = 'none'
     datacontainer.style.display = 'grid'
